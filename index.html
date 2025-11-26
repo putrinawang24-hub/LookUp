@@ -3,257 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Fungsi LOOKUP Excel</title>
+    <title>Infografis Excel Lookup</title>
     <!-- Memuat Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tema Hijau ala Excel -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'excel-green': '#107C41', // Hijau Khas Microsoft Excel
+                        'light-green': '#D9F7E0', // Hijau Muda untuk Latar
+                        'dark-green': '#0B5330', // Hijau Tua untuk Teks/Header
+                        'lookup-blue': '#1e40af', // Biru untuk Kontras
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        /* Menggunakan font Inter */
+        /* Gaya umum */
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
         }
-        /* Style tambahan untuk code block */
-        pre {
-            background-color: #2d3748; /* gray-800 */
-            color: #e2e8f0; /* gray-200 */
-            padding: 1rem;
-            border-radius: 0.5rem; /* rounded-lg */
+        .card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .code-block {
+            background-color: #e2e8f0;
+            border-left: 4px solid #3b82f6;
+            padding: 0.5rem 1rem;
+            font-family: monospace;
+            border-radius: 0.375rem;
+            color: #1e40af;
             overflow-x: auto;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
+            white-space: nowrap; /* Mencegah baris syntax terpotong */
+        }
+        .arg-label {
+            display: inline-block;
+            width: 150px; /* Lebar tetap untuk label argumen */
+            font-weight: 600;
+            color: #107C41;
+        }
+        .arg-desc {
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px dashed #e5e7eb;
         }
     </style>
-    <!-- Memuat font Inter dari Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100 text-gray-900 leading-relaxed">
+<body class="p-4 sm:p-8">
 
-    <!-- Kontainer Utama -->
-    <div class="container max-w-4xl mx-auto p-6 md:p-10 my-10 bg-white rounded-xl shadow-2xl">
+    <header class="text-center mb-10">
+        <div class="inline-block px-4 py-2 rounded-full bg-excel-green text-white font-bold text-xl sm:text-3xl shadow-lg">
+            📊 Panduan Cepat Excel Lookup
+        </div>
+        <p class="mt-3 text-gray-600 text-lg">Menguasai VLOOKUP, HLOOKUP, & XLOOKUP untuk Analisis Data yang Efisien.</p>
+    </header>
 
-        <!-- Judul Utama -->
-        <header class="text-center mb-10">
-            <h1 class="text-3xl md:text-5xl font-bold text-green-700">
-                Menguasai Fungsi LOOKUP di Excel
-            </h1>
-            <p class="text-lg md:text-xl text-gray-600 mt-3">
-                Dari VLOOKUP ke XLOOKUP: Panduan Lengkap Anda
-            </p>
-        </header>
+    <!-- Kontainer Vertikal untuk 3 Fungsi Lookup -->
+    <!-- Menggunakan space-y-8 untuk memisahkan setiap kartu secara jelas -->
+    <div class="space-y-8 max-w-4xl mx-auto">
 
-        <!-- Penjelasan Awal -->
-        <p class="text-lg text-gray-700 mb-8">
-            Selamat datang! Mari kita bedah tiga fungsi pencarian data paling penting di Excel. Memahaminya akan mengubah cara Anda bekerja dengan data.
-        </p>
-
-        <!-- Bagian 1: VLOOKUP -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-gray-800 border-l-4 border-green-600 pl-4 mb-5">
-                1. VLOOKUP <span class="text-xl font-normal">(Vertical LOOKUP)</span>
+        <!-- KARTU 1: VLOOKUP -->
+        <div class="card bg-white p-6 rounded-xl border-t-8 border-excel-green">
+            <h2 class="text-2xl font-extrabold mb-4 text-dark-green flex items-center">
+                <span class="text-3xl mr-2">🔍</span> VLOOKUP
             </h2>
-            <p class="mb-4 text-gray-700">Fungsi klasik untuk pencarian data secara vertikal (ke bawah).</p>
+            <p class="text-gray-700 mb-4 italic">Mencari data secara **Vertikal** (ke bawah kolom).</p>
+
+            <table class="w-full text-sm mb-4">
+                <thead>
+                    <tr class="bg-light-green text-left text-dark-green">
+                        <th class="p-2 rounded-tl-lg">Aspek</th>
+                        <th class="p-2 rounded-tr-lg">Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="p-2 border-b">Arah Pencarian</td>
+                        <td class="p-2 border-b">⬇️ Vertikal</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 border-b">Waktu Tepat</td>
+                        <td class="p-2 border-b">Kunci WAJIB di kolom paling kiri.</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2">Keterbatasan</td>
+                        <td class="p-2">Tidak bisa mencari ke kiri.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="text-lg font-semibold text-lookup-blue mt-4 mb-2">📝 Sintaks & Penjelasan Argumen</h3>
+            <div class="code-block">
+                =VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])
+            </div>
             
-            <!-- Analogi -->
-            <div class="bg-green-50 border border-green-200 p-5 rounded-lg italic text-gray-800 mb-6 shadow-sm">
-                <strong>Analogi:</strong> Seperti mencari nama Anda (misal: "Budi") di <strong>kolom pertama</strong> buku absen, lalu mengambil nilai di kolom ke-3 (misal: "Nilai Ujian").
+            <div class="mt-4 text-sm text-gray-700">
+                <div class="arg-desc"><span class="arg-label">lookup_value:</span> Nilai yang Anda cari di kolom pertama.</div>
+                <div class="arg-desc"><span class="arg-label">table_array:</span> Rentang sel data sumber. (Kolom pertama harus kunci).</div>
+                <div class="arg-desc"><span class="arg-label">col_index_num:</span> Nomor kolom dari `table_array` yang berisi hasil yang ingin dikembalikan. (Mulai dari 1).</div>
+                <div class="arg-desc"><span class="arg-label">[range_lookup]:</span> **TRUE** (pencocokan perkiraan) atau **FALSE** (pencocokan tepat).</div>
             </div>
 
-            <h3 class="text-xl font-semibold mb-3">Sintaks:</h3>
-            <pre><code>=VLOOKUP(nilai_dicari, tabel_array, nomor_indeks_kolom, [rentang_lookup])</code></pre>
+            <p class="text-xs text-gray-500 mt-2">Contoh: **`=VLOOKUP("P001", A1:C10, 3, FALSE)`**</p>
+        </div>
+
+        <!-- KARTU 2: HLOOKUP -->
+        <div class="card bg-white p-6 rounded-xl border-t-8 border-yellow-500">
+            <h2 class="text-2xl font-extrabold mb-4 text-dark-green flex items-center">
+                <span class="text-3xl mr-2">↔️</span> HLOOKUP
+            </h2>
+            <p class="text-gray-700 mb-4 italic">Mencari data secara **Horizontal** (ke samping baris).</p>
+
+            <table class="w-full text-sm mb-4">
+                <thead>
+                    <tr class="bg-yellow-100 text-left text-dark-green">
+                        <th class="p-2 rounded-tl-lg">Aspek</th>
+                        <th class="p-2 rounded-tr-lg">Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="p-2 border-b">Arah Pencarian</td>
+                        <td class="p-2 border-b">➡️ Horizontal</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 border-b">Waktu Tepat</td>
+                        <td class="p-2 border-b">Kunci WAJIB di baris paling atas.</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2">Keterbatasan</td>
+                        <td class="p-2">Tidak bisa mencari ke atas.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="text-lg font-semibold text-lookup-blue mt-4 mb-2">📝 Sintaks & Penjelasan Argumen</h3>
+            <div class="code-block border-blue-500">
+                =HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])
+            </div>
             
-            <ul class="list-disc list-outside pl-5 space-y-3 my-5 text-gray-700">
-                <li><code>nilai_dicari</code>: Apa yang ingin Anda cari (Contoh: ID Karyawan "A-101").</li>
-                <li><code>tabel_array</code>: Seluruh rentang tabel data Anda.</li>
-                <li><code>nomor_indeks_kolom</code>: Kolom ke berapa (dari kiri) yang datanya ingin Anda ambil.</li>
-                <li><code>[rentang_lookup]</code>:
-                    <ul class="list-['-_'] list-outside pl-6 mt-2 space-y-2">
-                        <li><code>FALSE</code> (atau <code>0</code>): Untuk pencocokan <strong>pasti</strong> (Paling sering digunakan).</li>
-                        <li><code>TRUE</code> (atau <code>1</code>): Untuk pencocokan <strong>perkiraan</strong> (Jarang digunakan, data harus terurut).</li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="mt-4 text-sm text-gray-700">
+                <div class="arg-desc"><span class="arg-label">lookup_value:</span> Nilai yang Anda cari di baris pertama.</div>
+                <div class="arg-desc"><span class="arg-label">table_array:</span> Rentang sel data sumber. (Baris pertama harus kunci).</div>
+                <div class="arg-desc"><span class="arg-label">row_index_num:</span> Nomor baris dari `table_array` yang berisi hasil yang ingin dikembalikan. (Mulai dari 1).</div>
+                <div class="arg-desc"><span class="arg-label">[range_lookup]:</span> **TRUE** (pencocokan perkiraan) atau **FALSE** (pencocokan tepat).</div>
+            </div>
 
-            <h3 class="text-xl font-semibold mb-3 text-red-700">Keterbatasan Utama:</h3>
-            <ul class="list-disc list-outside pl-5 space-y-2 text-red-700 bg-red-50 border border-red-200 p-5 rounded-lg">
-                <li>Hanya bisa mencari di <strong>kolom paling kiri</strong> dari <code>tabel_array</code>.</li>
-                <li>Tidak bisa mengambil data di kolom sebelah <strong>kiri</strong> dari kolom pencarian.</li>
-                <li><strong>"Rapuh":</strong> Jika Anda menambah atau menghapus kolom, <code>nomor_indeks_kolom</code> bisa salah dan rumus rusak.</li>
-            </ul>
-        </section>
+            <p class="text-xs text-gray-500 mt-2">Contoh: **`=HLOOKUP("Maret", B1:E5, 4, FALSE)`**</p>
+        </div>
 
-        <!-- Bagian 2: HLOOKUP -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-gray-800 border-l-4 border-green-600 pl-4 mb-5">
-                2. HLOOKUP <span class="text-xl font-normal">(Horizontal LOOKUP)</span>
+        <!-- KARTU 3: XLOOKUP -->
+        <div class="card bg-white p-6 rounded-xl border-t-8 border-red-500">
+            <h2 class="text-2xl font-extrabold mb-4 text-dark-green flex items-center">
+                <span class="text-3xl mr-2">⭐️</span> XLOOKUP
             </h2>
-            <p class="mb-4 text-gray-700">Saudara kembar VLOOKUP, tapi untuk pencarian data secara horizontal (ke samping).</p>
+            <p class="text-gray-700 mb-4 italic">Fungsi modern, paling fleksibel, menggantikan VLOOKUP/HLOOKUP.</p>
 
-            <!-- Analogi -->
-            <div class="bg-green-50 border border-green-200 p-5 rounded-lg italic text-gray-800 mb-6 shadow-sm">
-                <strong>Analogi:</strong> Seperti mencari "Bulan: Februari" di <strong>baris pertama</strong> sebuah tabel anggaran, lalu mengambil data di baris ke-5 (misal: "Biaya Operasional").
+            <table class="w-full text-sm mb-4">
+                <thead>
+                    <tr class="bg-red-100 text-left text-dark-green">
+                        <th class="p-2 rounded-tl-lg">Aspek</th>
+                        <th class="p-2 rounded-tr-lg">Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="p-2 border-b">Arah Pencarian</td>
+                        <td class="p-2 border-b">🔄 Bebas (Kiri/Kanan, Atas/Bawah)</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2 border-b">Waktu Tepat</td>
+                        <td class="p-2 border-b">**Selalu Gunakan** (Excel 365/2021+).</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2">Kekuatan Utama</td>
+                        <td class="p-2">Mencari ke Kiri & `[if_not_found]` bawaan.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="text-lg font-semibold text-lookup-blue mt-4 mb-2">📝 Sintaks & Penjelasan Argumen</h3>
+            <div class="code-block border-blue-500">
+                =XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found], [match_mode], [search_mode])
             </div>
 
-            <h3 class="text-xl font-semibold mb-3">Sintaks:</h3>
-            <pre><code>=HLOOKUP(nilai_dicari, tabel_array, nomor_indeks_baris, [rentang_lookup])</code></pre>
-
-            <ul class="list-disc list-outside pl-5 space-y-3 my-5 text-gray-700">
-                <li><code>nilai_dicari</code>: Apa yang ingin Anda cari (Contoh: "Q1-2024").</li>
-                <li><code>tabel_array</code>: Seluruh rentang tabel data Anda.</li>
-                <li><code>nomor_indeks_baris</code>: Baris ke berapa (dari atas) yang datanya ingin Anda ambil.</li>
-                <li><code>[rentang_lookup]</code>: <code>FALSE</code> (pasti) atau <code>TRUE</code> (perkiraan).</li>
-            </ul>
-
-            <h3 class="text-xl font-semibold mb-3 text-red-700">Keterbatasan Utama:</h3>
-            <ul class="list-disc list-outside pl-5 space-y-2 text-red-700 bg-red-50 border border-red-200 p-5 rounded-lg">
-                <li>Sama seperti VLOOKUP, tapi versi horizontal.</li>
-                <li>Hanya bisa mencari di <strong>baris paling atas</strong> dari <code>tabel_array</code>.</li>
-                <li>Tidak bisa mengambil data di baris sebelah <strong>atas</strong> dari baris pencarian.</li>
-            </ul>
-        </section>
-
-        <!-- Bagian 3: XLOOKUP -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-gray-800 border-l-4 border-green-600 pl-4 mb-5">
-                3. XLOOKUP <span class="text-xl font-normal">(The Modern Hero)</span>
-            </h2>
-            <p class="mb-4 text-gray-700">Fungsi modern yang diciptakan untuk menggantikan VLOOKUP dan HLOOKUP. Jauh lebih fleksibel, intuitif, dan bertenaga.</p>
-
-            <!-- Analogi -->
-            <div class="bg-green-50 border border-green-200 p-5 rounded-lg italic text-gray-800 mb-6 shadow-sm">
-                <strong>Analogi:</strong> Seperti GPS. Anda tidak perlu tahu seluruh peta (<code>tabel_array</code>). Cukup beri tahu:
-                <ol class="list-decimal list-outside pl-6 mt-2">
-                    <li>Lokasi Anda saat ini (misal: ID "A-101" di kolom <code>C:C</code>).</li>
-                    <li>Apa yang ingin Anda lihat di sana (misal: "Nama Karyawan" di kolom <code>B:B</code>).</li>
-                </ol>
+            <div class="mt-4 text-sm text-gray-700">
+                <div class="arg-desc"><span class="arg-label">lookup_value:</span> Nilai yang Anda cari.</div>
+                <div class="arg-desc"><span class="arg-label">lookup_array:</span> **Satu** kolom/baris tempat pencarian nilai.</div>
+                <div class="arg-desc"><span class="arg-label">return_array:</span> **Satu** kolom/baris yang berisi hasil yang ingin dikembalikan.</div>
+                <div class="arg-desc"><span class="arg-label">[if_not_found]:</span> *Opsional*. Nilai/teks yang dikembalikan jika tidak ditemukan (menggantikan `IFERROR`).</div>
+                <div class="arg-desc"><span class="arg-label">[match_mode]:</span> *Opsional*. 0 (Tepat - Default), -1 (Tepat atau Terkecil), 1 (Tepat atau Terbesar).</div>
+                <div class="arg-desc"><span class="arg-label">[search_mode]:</span> *Opsional*. 1 (Dari atas ke bawah - Default) atau -1 (Dari bawah ke atas/terbalik).</div>
             </div>
 
-            <h3 class="text-xl font-semibold mb-3">Sintaks:</h3>
-            <pre><code>=XLOOKUP(nilai_dicari, lookup_array, return_array, [jika_tidak_ditemukan], [mode_pencocokan], [mode_pencarian])</code></pre>
+            <p class="text-xs text-gray-500 mt-2">Contoh: **`=XLOOKUP("C100", C:C, A:A, "Data Kosong")`**</p>
+        </div>
+    </div>
 
-            <ul class="list-disc list-outside pl-5 space-y-3 my-5 text-gray-700">
-                <li><code>nilai_dicari</code>: Apa yang ingin Anda cari.</li>
-                <li><code>lookup_array</code>: <strong>Hanya</strong> kolom atau baris tempat mencari (Contoh: <code>C:C</code>).</li>
-                <li><code>return_array</code>: <strong>Hanya</strong> kolom atau baris tempat data yang ingin diambil (Contoh: <code>B:B</code>).</li>
-            </ul>
-
-            <h3 class="text-xl font-semibold mb-3 text-green-700">Mengapa XLOOKUP Jauh Lebih Unggul:</h3>
-            <ul class="list-disc list-outside pl-5 space-y-2 text-green-800 bg-green-50 border border-green-200 p-5 rounded-lg">
-                <li><strong>Default Tepat:</strong> Mode pencocokan default-nya adalah <strong>pasti</strong> (Anda tidak perlu mengetik <code>FALSE</code> lagi).</li>
-                <li><strong>Fleksibel:</strong> Bisa mencari di kolom mana pun dan mengambil data di kolom mana pun (kiri, kanan, atas, bawah).</li>
-                <li><strong>Tahan Banting:</strong> Rumus tidak rusak meski Anda menambah atau menghapus kolom/baris.</li>
-                <li><strong>Penanganan Error Bawaan:</strong> Argumen <code>[jika_tidak_ditemukan]</code> memungkinkan Anda menampilkan pesan custom (Contoh: "Data Tidak Ada") tanpa perlu fungsi <code>IFERROR</code>.</li>
-                <li>Bisa melakukan pencarian terbalik (dari bawah ke atas).</li>
-            </ul>
-            
-            <div class="mt-5 p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-yellow-800">
-                <strong>Keterbatasan:</strong> Hanya tersedia di <strong>Excel 365, Excel 2021, dan versi lebih baru</strong>. Tidak berfungsi di Excel 2019, 2016, dst.
-            </div>
-        </section>
-
-        <!-- Bagian 4: Perbandingan -->
-        <section class="mb-12">
-            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
-                Perbandingan Cepat
-            </h2>
-            
-            <div class="overflow-x-auto rounded-lg shadow-md border border-gray-200">
-                <table class="w-full min-w-max border-collapse">
-                    <thead class="bg-green-800 text-white">
-                        <tr>
-                            <th class="p-4 text-left font-semibold">Fitur</th>
-                            <th class="p-4 text-left font-semibold">VLOOKUP</th>
-                            <th class="p-4 text-left font-semibold">HLOOKUP</th>
-                            <th class="p-4 text-left font-semibold bg-green-600">XLOOKUP</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700">
-                        <tr class="bg-white hover:bg-gray-50 border-b border-gray-200">
-                            <td class="p-4 font-semibold">Arah Pencarian</td>
-                            <td class="p-4">Vertikal (Ke bawah)</td>
-                            <td class="p-4">Horizontal (Ke samping)</td>
-                            <td class="p-4 font-semibold text-green-700">Fleksibel (Vertikal & Horizontal)</td>
-                        </tr>
-                        <tr class="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
-                            <td class="p-4 font-semibold">Lokasi Pencarian</td>
-                            <td class="p-4">Hanya kolom pertama</td>
-                            <td class="p-4">Hanya baris pertama</td>
-                            <td class="p-4 font-semibold text-green-700">Kolom/Baris manapun</td>
-                        </tr>
-                        <tr class="bg-white hover:bg-gray-50 border-b border-gray-200">
-                            <td class="p-4 font-semibold">Arah Pengambilan</td>
-                            <td class="p-4">Hanya ke KANAN</td>
-                            <td class="p-4">Hanya ke BAWAH</td>
-                            <td class="p-4 font-semibold text-green-700">Kiri, Kanan, Atas, Bawah</td>
-                        </tr>
-                        <tr class="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
-                            <td class="p-4 font-semibold">Lokasi Pencarian</td>
-                            <td class="p-4">Hanya kolom pertama</td>
-                            <td class="p-4">Hanya baris pertama</td>
-                            <td class="p-4 font-semibold text-blue-700">Kolom/Baris manapun</td>
-                        </tr>
-                        <tr class="bg-white hover:bg-gray-50 border-b border-gray-200">
-                            <td class="p-4 font-semibold">Arah Pengambilan</td>
-                            <td class="p-4">Hanya ke KANAN</td>
-                            <td class="p-4">Hanya ke BAWAH</td>
-                            <td class="p-4 font-semibold text-blue-700">Kiri, Kanan, Atas, Bawah</td>
-                        </tr>
-                        <tr class="bg-gray-50 hover:bg-gray-100 border-b border-gray-200">
-                            <td class="p-4 font-semibold">Default Match</td>
-                            <td class="p-4">Perkiraan (`TRUE`) <span class="text-red-500">❌</span></td>
-                            <td class="p-4">Perkiraan (`TRUE`) <span class="text-red-500">❌</span></td>
-                            <td class="p-4 font-semibold text-green-600">Pasti (`FALSE`) ✅</td>
-                        </tr>
-                        <tr class="bg-white hover:bg-gray-50 border-b border-gray-200">
-                            <td class="p-4 font-semibold">Penanganan Error</td>
-                            <td class="p-4">Perlu `IFERROR`</td>
-                            <td class="p-4">Perlu `IFERROR`</td>
-                            <td class="p-4 font-semibold text-green-600">Bawaan (`[jika...]`) ✅</td>
-                        </tr>
-                        <tr class="bg-gray-50 hover:bg-gray-100">
-                            <td class="p-4 font-semibold">Rumus "Rapuh"?</td>
-                            <td class="p-4">Ya (Jika kolom berubah) <span class="text-red-500">❌</span></td>
-                            <td class="p-4">Ya (Jika baris berubah) <span class="text-red-500">❌</span></td>
-                            <td class="p-4 font-semibold text-green-600">Tidak (Referensi kolom) ✅</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Bagian 5: Rekomendasi -->
-        <section>
-            <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
-                Kapan Harus Pakai yang Mana?
-            </h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Card 1: XLOOKUP -->
-                <div class="bg-green-50 p-6 rounded-lg shadow-lg border border-green-200">
-                    <h3 class="text-xl font-bold text-green-700 mb-3">1. Gunakan XLOOKUP (Pilihan Utama)</h3>
-                    <p class="text-gray-800">
-                        Jika Anda dan semua orang yang akan membuka file Anda menggunakan <strong>Excel 365 atau 2021+</strong>. Ini adalah standar baru.
-                    </p>
-                </div>
-                <!-- Card 2: V/HLOOKUP -->
-                <div class="bg-yellow-50 p-6 rounded-lg shadow-lg border border-yellow-300">
-                    <h3 class="text-xl font-bold text-yellow-800 mb-3">2. Gunakan VLOOKUP / HLOOKUP</h3>
-                    <p class="text-gray-800">
-                        Jika file Anda harus bisa dibuka dan diedit oleh pengguna dengan <strong>Excel versi lama (2019, 2016, 2013)</strong> untuk kompatibilitas.
-                    </p>
-                </div>
-                <!-- Card 3: Alternatif -->
-                <div class="bg-gray-100 p-6 rounded-lg shadow-lg border border-gray-300">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">3. Alternatif (Jika XLOOKUP tidak ada)</h3>
-                    <p class="text-gray-800">
-                        Jika Anda perlu pencarian kompleks (seperti melihat ke kiri) di Excel lama, gunakan kombinasi <strong>`INDEX`</strong> dan <strong>`MATCH`</strong>.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <!-- Rangkuman dan Kesimpulan -->
+    <div class="max-w-4xl mx-auto mt-10 p-6 bg-light-green rounded-xl border-2 border-excel-green">
+        <h2 class="text-2xl font-extrabold mb-4 text-dark-green flex items-center">
+            🏆 Rangkuman & Rekomendasi
+        </h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead>
+                    <tr class="bg-excel-green text-white">
+                        <th class="p-3 text-left rounded-tl-lg">Fitur</th>
+                        <th class="p-3 text-left">VLOOKUP</th>
+                        <th class="p-3 text-left rounded-tr-lg">XLOOKUP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-gray-50 border-b">
+                        <td class="p-3 font-semibold">Arah Pencarian</td>
+                        <td class="p-3">Hanya Kanan</td>
+                        <td class="p-3">**Kiri, Kanan, Atas, Bawah**</td>
+                    </tr>
+                    <tr class="bg-white border-b">
+                        <td class="p-3 font-semibold">Penempatan Kunci</td>
+                        <td class="p-3">Wajib Kolom Pertama</td>
+                        <td class="p-3">**Bebas Kolom Mana Saja**</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="p-3 font-semibold">Penanganan Error (#N/A)</td>
+                        <td class="p-3">Perlu `IFERROR()`</td>
+                        <td class="p-3">Argumen bawaan `[if_not_found]`</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         
-    </div> <!-- Akhir Kontainer Utama -->
+        <p class="text-xl font-bold text-center mt-5 text-dark-green bg-white p-3 rounded-lg border border-excel-green">
+            ✅ KESIMPULAN: **Selalu prioritaskan penggunaan XLOOKUP** jika versi Excel Anda mendukungnya!
+        </p>
+    </div>
 
 </body>
 </html>
-
-
